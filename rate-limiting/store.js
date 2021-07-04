@@ -1,19 +1,25 @@
-function calculateNextResetTime(timeframe) {
-  const d = new Date();
-  d.setMilliseconds(d.getMilliseconds() + timeframe);
-  return d;
-}
+const Datastore = require("nedb");
+const db = new Datastore({ filename: "data/rate-limit.db", autoload: true });
 
-function MemoryStore(timeframe) {
-  let hits = {};
-  let resetTime = calculateNextResetTime(timeframe);
+db.loadDatabase();
+db.insert({});
 
-  this.increment = function (key) {
-    if (hits[key]) {
-      hits[key]++;
-    } else {
-      hits[key] = 1;
-    }
-    console.log(hits);
-  };
-}
+// function calculateNextResetTime(timeframe) {
+//   const d = new Date();
+//   d.setMilliseconds(d.getMilliseconds() + timeframe);
+//   return d;
+// }
+
+// function MemoryStore(timeframe) {
+//   let hits = {};
+//   let resetTime = calculateNextResetTime(timeframe);
+
+//   this.increment = function (key) {
+//     if (hits[key]) {
+//       hits[key]++;
+//     } else {
+//       hits[key] = 1;
+//     }
+//     console.log(hits);
+//   };
+// }
